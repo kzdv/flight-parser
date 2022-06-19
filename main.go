@@ -10,13 +10,13 @@ import (
 	"time"
 
 	"github.com/common-nighthawk/go-figure"
-	"github.com/dhawton/log4g"
 	"github.com/joho/godotenv"
 	"github.com/kzdv/flight-parse/database"
 	"github.com/kzdv/flight-parse/geo"
 	kzdvTypes "github.com/kzdv/types/database"
 	"github.com/robfig/cron/v3"
 	"gorm.io/gorm"
+	"hawton.dev/log4g"
 )
 
 var facilities map[string]geo.Polygon
@@ -62,7 +62,7 @@ func main() {
 	}
 
 	log.Info("Connecting to database and handling migrations")
-	database.Connect(Getenv("DB_USERNAME", "root"), Getenv("DB_PASSWORD", "secret"), Getenv("DB_HOSTNAME", "localhost"), Getenv("DB_PORT", "3306"), Getenv("DB_DATABASE", "zdv"))
+	database.Connect(Getenv("DB_USERNAME", "root"), Getenv("DB_PASSWORD", "secret"), Getenv("DB_HOST", "localhost"), Getenv("DB_PORT", "3306"), Getenv("DB_DATABASE", "zdv"))
 
 	log.Info("Running first time...")
 	ProcessFlights()
